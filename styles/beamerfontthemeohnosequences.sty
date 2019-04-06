@@ -1,0 +1,88 @@
+% Beamer mtheme
+%
+% Copyright 2014 Matthias Vogelgesang
+% Licensed under CC-BY-SA 4.0 International.
+%
+% The initial template comes from the HSRM beamer theme by Benjamin Weiss, which
+% you can find at https://github.com/hsrmbeamertheme/hsrmbeamertheme.
+%
+
+\ProvidesPackage{beamerfontthemeohnosequences}
+
+\RequirePackage{fontspec,unicode-math}
+
+\defaultfontfeatures{Mapping = tex-text}
+
+% tmp
+% \setmainfont[
+%   BoldFont        = {* SemiBold},
+%   BoldItalicFont  = {* SemiBold Italic},
+%   ItalicFont      = {* Italic}
+% ]{Fira Sans}
+\setmainfont[Color = Grey]{Libertinus Serif}
+
+% \setsansfont[
+%   BoldItalicFont  = {Fira Sans Italic},
+%   ItalicFont      = {Fira Sans Light Italic},
+%   BoldFont        = {Fira Sans Light}
+% ]{Open Sans Light}
+\setsansfont[Color = Grey]{Libertinus Serif}
+
+\setmonofont[
+  Mapping   = tex-ansi
+]{Fira Mono}
+
+\setmathfont[Color = Grey]{Libertinus Math}
+
+\newfontfamily\ExtraLight{Fira Sans Light}
+\newfontfamily\Light{Fira Sans Light}
+\newfontfamily\Book{Libertinus Serif Semibold}
+\newfontfamily\Medium{Fira Sans}
+% tmp
+
+% \setmainfont[
+%   Color           = Grey,
+%   BoldFont        = {Fira Sans},
+%   BoldItalicFont  = {Fira Sans Italic},
+%   ItalicFont      = {* Italic}
+% ]{Fira Sans Light}
+
+% \setsansfont[
+%   Color           = Grey,
+%   BoldFont        = {Fira Sans},
+%   BoldItalicFont  = {Fira Sans Italic},
+%   ItalicFont      = {* Italic}
+% ]{Fira Sans Light}
+
+
+% \setmonofont[
+%   Mapping   = tex-ansi
+% ]{Fira Mono}
+
+% \setmathfont[Color = Grey]{Libertinus Math}
+
+% \newfontfamily\ExtraLight{Fira Sans Light}
+% \newfontfamily\Light{Fira Sans Light}
+% \newfontfamily\Book{Fira Sans}
+% \newfontfamily\Medium{Fira Sans}
+
+\setbeamerfont{title}{family=\Book, size=\Large}
+\setbeamerfont{author}{family=\ExtraLight, size=\small}
+\setbeamerfont{date}{family=\ExtraLight, size=\small}
+
+\setbeamerfont{section title}{family=\Book, size=\Large}
+
+\setbeamerfont{block title}{family=\Book, size=\normalsize}
+\setbeamerfont{block title alerted}{family=\Book,size=\normalsize}
+
+\setbeamerfont{subtitle}{family=\Light, size=\fontsize{12}{14}}
+\setbeamerfont{frametitle}{family=\Book, size=\large}
+
+\setbeamerfont{caption}{size=\small}
+\setbeamerfont{caption name}{family=\Book}
+
+\setbeamerfont{description item}{family=\Book}
+
+\setbeamerfont{page number in head/foot}{size=\scriptsize}
+
+\linespread{1.15}

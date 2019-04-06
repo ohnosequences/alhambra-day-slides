@@ -1,0 +1,330 @@
+\documentclass[notheorems,14pt,compress]{beamer}
+
+\usepackage{fontspec,xltxtra,xunicode}
+% math conf
+% math symbols and such should go before unicode-math!
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{unicode-math}
+
+\usetheme{ohnosequences}
+\usecolortheme{ohnosequences}
+% so that fontspec and unicode-math work
+% see https://tex.stackexchange.com/questions/26805/how-to-use-unicode-math-with-beamer-and-lualatex
+\usefonttheme{professionalfonts}
+\usefonttheme{ohnosequences}
+\usepackage{amssymb}
+
+\let\OldHref\href
+\renewcommand{\href}[2]{\OldHref[pdfnewwindow]{#1}{{\textbf{#2}}}}
+
+\providecommand{\tightlist}{%
+\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+\usepackage{caption}
+\setbeamertemplate{caption}{\insertcaption}
+% \captionsetup{labelformat=empty,labelsep=none}
+% \setbeamertemplate{caption}[numbered]
+% \setbeamertemplate{caption label separator}{:}
+% \setbeamercolor{caption name}{fg=normal text.fg}
+% \usepackage{amssymb,amsmath}
+% \usepackage{ifxetex,ifluatex}
+% \usepackage{fixltx2e} % provides \textsubscript
+% \usepackage{lmodern}
+\newcommand{\euro}{€}
+
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+% \IfFileExists{microtype.sty}{\usepackage{microtype}}{}
+$if(natbib)$
+\usepackage{natbib}
+\bibliographystyle{plainnat}
+$endif$
+$if(biblatex)$
+\usepackage{biblatex}
+$for(bibliography)$
+\addbibresource{$bibliography$}
+$endfor$
+$endif$
+$if(listings)$
+\usepackage{listings}
+$endif$
+
+$if(highlighting-macros)$
+% verbatim and code highlighting: Solarized Light
+\usepackage{color}
+% SOLARIZED
+\definecolor{solarized@base03}{HTML}{002B36}
+\definecolor{solarized@base02}{HTML}{073642}
+\definecolor{solarized@base01}{HTML}{586e75}
+\definecolor{solarized@base00}{HTML}{657b83}
+\definecolor{solarized@base0}{HTML}{839496}
+\definecolor{solarized@base1}{HTML}{93a1a1}
+\definecolor{solarized@base2}{HTML}{EEE8D5}
+\definecolor{solarized@base3}{HTML}{FDF6E3}
+\definecolor{solarized@yellow}{HTML}{B58900}
+\definecolor{solarized@orange}{HTML}{CB4B16}
+\definecolor{solarized@red}{HTML}{DC322F}
+\definecolor{solarized@magenta}{HTML}{D33682}
+\definecolor{solarized@violet}{HTML}{6C71C4}
+\definecolor{solarized@blue}{HTML}{268BD2}
+\definecolor{solarized@cyan}{HTML}{2AA198}
+\definecolor{solarized@green}{HTML}{859900}
+
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{fontsize=\footnotesize,commandchars=\\\{\}}
+
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+% this is solarized light
+\definecolor{shadecolor}{RGB}{253,246,227} % solarized@base3
+\newenvironment{Shaded}{\vspace{\baselineskip}\begin{shaded}}{\end{shaded}\vspace{\baselineskip}}
+% colored backgrd for verb
+\let\oldverbatim=\verbatim
+\let\endoldverbatim=\endverbatim
+  \vspace{\baselineskip}
+\renewenvironment{verbatim}[1]{%
+  \scriptsize
+  \par\setstretch{1}
+  \begin{shaded}
+  \begin{oldverbatim}{#1}%
+}%
+{%
+  \end{oldverbatim}%
+  \end{shaded}
+  \vspace{\baselineskip}
+}
+
+\newcommand{\KeywordTok}[1]{\textcolor{solarized@base00}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor{solarized@blue}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor{solarized@violet}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor{solarized@violet}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor{solarized@violet}{#1}}
+\newcommand{\CharTok}[1]{\textcolor{solarized@cyan}{#1}}
+\newcommand{\StringTok}[1]{\textcolor{solarized@violet}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor{solarized@base1}{\textit{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor{solarized@green}{#1}}
+\newcommand{\AlertTok}[1]{\textcolor{solarized@yellow}{\textbf{#1}}}
+% In Scala: method calls
+\newcommand{\FunctionTok}[1]{\textcolor{solarized@base1}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor{solarized@base1}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor{solarized@red}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{\textcolor{solarized@base00}{#1}}
+
+$endif$
+
+% allow to break lines more easily on tt text
+% http://tex.stackexchange.com/questions/52850/temporarily-increase-the-limit-on-space-size
+\let\OldTexttt\texttt
+\renewcommand{\texttt}[1]{ \emergencystretch=2em \OldTexttt{#1} }
+% maybe?
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+
+$if(verbatim-in-note)$
+\usepackage{fancyvrb}
+$endif$
+$if(tables)$
+\usepackage{longtable,booktabs}
+
+\usepackage{caption}
+% \captionsetup[figure]{labelformat=empty}
+
+% These lines are needed to make table captions work with longtable:
+\makeatletter
+\def\fnum@table{\tablename~\thetable}
+\makeatother
+$endif$
+$if(url)$
+\usepackage{url}
+$endif$
+$if(graphics)$
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight0.8\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+$endif$
+
+% Comment these out if you don't want a slide with just the
+% part/section/subsection/subsubsection title:
+% \AtBeginPart{
+%   \let\insertpartnumber\relax
+%   \let\partname\relax
+%   \frame{\partpage}
+% }
+% \AtBeginSection{
+%   \let\insertsectionnumber\relax
+%   \let\sectionname\relax
+%   \frame{\sectionpage}
+% }
+% \AtBeginSubsection{
+%   \let\insertsubsectionnumber\relax
+%   \let\subsectionname\relax
+%   \frame{\subsectionpage}
+% }
+
+$if(strikeout)$
+\usepackage[normalem]{ulem}
+% avoid problems with \sout in headers with hyperref:
+\pdfstringdefDisableCommands{\renewcommand{\sout}{}}
+$endif$
+% \setlength{\parindent}{0pt}
+% \setlength{\parskip}{6pt plus 2pt minus 1pt}
+% \setlength{\emergencystretch}{3em}  % prevent overfull lines
+$if(verbatim-in-note)$
+\VerbatimFootnotes % allows verbatim text in footnotes
+$endif$
+\usepackage{polyglossia}
+\setmainlanguage{english}
+% \setotherlanguages{$for(otherlang)$$otherlang$$sep$,$endfor$}
+
+\hypersetup{
+  pdfnewwindow,
+  colorlinks,
+  setpagesize     = false,        % page size defined by xetex
+  citecolor       = OldCyan-Dark,
+  filecolor       = OldCyan-Dark,
+  linkcolor       = OldCyan-Dark,
+  urlcolor        = OldCyan-Dark,
+  urlbordercolor  = OldCyan-Dark
+}
+
+
+\usepackage[noabbrev,capitalize]{cleveref}
+\usepackage{amsthm}
+% theorem environments
+% does not work here
+% see https://tex.stackexchange.com/questions/304024/beamer-with-numbered-theorems-not-working-with-cleveref
+% \newcounter{dummy}\numberwithin{dummy}{subsection}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+% \newcommand{\propositionautorefname}{Proposition}
+% \crefname{proposition}{Proposition}{Propositions}
+\newtheorem{corollary}{Corollary}
+\newtheorem{lemma}{Lemma}
+\newtheorem{conjecture}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{Def}{Definition}
+\newtheorem{Remark}{Remark}
+\newtheorem{Example}{Example}
+
+\let\amsmathcolon\colon
+\patchcmd{\amsmathcolon}{:}{\colon}{}{}
+  \AtBeginDocument{
+    \edef\colon{\mathrel{\Umathcharnum\the\Umathcodenum`:}}
+    \begingroup\lccode`~=`:
+    \lowercase{\endgroup\let~}\amsmathcolon
+    \mathcode`:="8000
+  }
+
+% specific tex stuff which doesn't work due to YAML escaping []
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\coim}{coim}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\eq}{eq}
+\DeclareMathOperator{\coeq}{coeq}
+\DeclareMathOperator{\quot}{quot}
+\newcommand{\colim}{\varprojlim}
+\newcommand{\Sub}{\mathbf{Sub}}
+\newcommand{\cat}[1]{\mathcal{#1}}
+\newcommand{\Sup}{\mathbf{Sup}}
+\newcommand{\DLat}{\mathbf{DLat}}
+\newcommand{\SLat}{\mathbf{SLat}}
+\newcommand{\LLat}{\mathbf{LLat}}
+\newcommand{\Ab}{\mathbf{Ab}}
+\newcommand{\Cat}{\mathbf{Cat}}
+\newcommand{\Cart}{\mathbf{Cart}}
+\newcommand{\Set}{\mathbf{Set}}
+\newcommand{\Rel}{\mathbf{Rel}}
+\newcommand{\Setd}{\mathbf{Setd}}
+\newcommand{\CRig}{\mathbf{CRig}}
+\newcommand{\CRing}{\mathbf{CRing}}
+\newcommand{\Mon}{\mathbf{Mon}}
+\newcommand{\CMon}{\mathbf{CMon}}
+\newcommand{\ICMon}{\mathbf{ICMon}}
+\newcommand{\CComon}{\mathbf{CComon}}
+\newcommand{\ICComon}{\mathbf{ICComon}}
+\newcommand{\Mod}{\mathbf{Mod}}
+\newcommand{\Dioid}{\mathbf{Dioid}}
+\newcommand{\CSLat}{\mathbf{CSLat}}
+\newcommand{\Alg}{\mathbf{Alg}}
+\newcommand{\SMonCat}{\mathbf{SMonCat}}
+\newcommand{\CQuant}{\mathbf{CQuant}}
+\newcommand{\Frm}{\mathbf{Frm}}
+\newcommand{\Loc}{\mathbf{Loc}}
+\newcommand{\Top}{\mathbf{Top}}
+\newcommand{\Eq}{\mathbf{Eq}}
+\newcommand{\Ker}{\mathbf{Ker}}
+\newcommand{\Quot}{\mathbf{Quot}}
+
+$for(header-includes)$
+$header-includes$
+$endfor$
+
+\usepackage{booktabs}
+\usepackage[scale=2]{ccicons}
+
+$if(title)$
+\title{$title$}
+$endif$
+$if(subtitle)$
+\subtitle{$subtitle$}
+$endif$
+$if(author)$
+\author{$for(author)$$author$$sep$ \and $endfor$}
+$endif$
+\date{$date$}
+
+\begin{document}
+$if(title)$
+\maketitle
+$endif$
+
+$for(include-before)$
+$include-before$
+
+$endfor$
+
+% $if(toc)$
+% \begin{frame}
+% \tableofcontents[hideallsubsections]
+% \end{frame}
+%
+% $endif$
+
+$body$
+
+$if(natbib)$
+$if(bibliography)$
+$if(biblio-title)$
+$if(book-class)$
+\renewcommand\bibname{$biblio-title$}
+$else$
+\renewcommand\refname{$biblio-title$}
+$endif$
+$endif$
+\begin{frame}[allowframebreaks]{$biblio-title$}
+\bibliography{$for(bibliography)$$bibliography$$sep$,$endfor$}
+\end{frame}
+
+$endif$
+$endif$
+$if(biblatex)$
+\begin{frame}[allowframebreaks]{$biblio-title$}
+\printbibliography[heading=none]
+\end{frame}
+
+$endif$
+$for(include-after)$
+$include-after$
+
+$endfor$
+\end{document}

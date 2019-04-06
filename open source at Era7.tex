@@ -1,0 +1,409 @@
+\documentclass[notheorems,14pt,compress]{beamer}
+
+\usepackage{fontspec,xltxtra,xunicode}
+% math conf
+% math symbols and such should go before unicode-math!
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{unicode-math}
+
+\usetheme{ohnosequences}
+\usecolortheme{ohnosequences}
+% so that fontspec and unicode-math work
+% see https://tex.stackexchange.com/questions/26805/how-to-use-unicode-math-with-beamer-and-lualatex
+\usefonttheme{professionalfonts}
+\usefonttheme{ohnosequences}
+\usepackage{amssymb}
+
+\let\OldHref\href
+\renewcommand{\href}[2]{\OldHref[pdfnewwindow]{#1}{{\textbf{#2}}}}
+
+\providecommand{\tightlist}{%
+\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+\usepackage{caption}
+\setbeamertemplate{caption}{\insertcaption}
+% \captionsetup{labelformat=empty,labelsep=none}
+% \setbeamertemplate{caption}[numbered]
+% \setbeamertemplate{caption label separator}{:}
+% \setbeamercolor{caption name}{fg=normal text.fg}
+% \usepackage{amssymb,amsmath}
+% \usepackage{ifxetex,ifluatex}
+% \usepackage{fixltx2e} % provides \textsubscript
+% \usepackage{lmodern}
+\newcommand{\euro}{€}
+
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+% \IfFileExists{microtype.sty}{\usepackage{microtype}}{}
+
+
+% allow to break lines more easily on tt text
+% http://tex.stackexchange.com/questions/52850/temporarily-increase-the-limit-on-space-size
+\let\OldTexttt\texttt
+\renewcommand{\texttt}[1]{ \emergencystretch=2em \OldTexttt{#1} }
+% maybe?
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+
+
+% Comment these out if you don't want a slide with just the
+% part/section/subsection/subsubsection title:
+% \AtBeginPart{
+%   \let\insertpartnumber\relax
+%   \let\partname\relax
+%   \frame{\partpage}
+% }
+% \AtBeginSection{
+%   \let\insertsectionnumber\relax
+%   \let\sectionname\relax
+%   \frame{\sectionpage}
+% }
+% \AtBeginSubsection{
+%   \let\insertsubsectionnumber\relax
+%   \let\subsectionname\relax
+%   \frame{\subsectionpage}
+% }
+
+% \setlength{\parindent}{0pt}
+% \setlength{\parskip}{6pt plus 2pt minus 1pt}
+% \setlength{\emergencystretch}{3em}  % prevent overfull lines
+\usepackage{polyglossia}
+\setmainlanguage{english}
+% \setotherlanguages{}
+
+\hypersetup{
+  pdfnewwindow,
+  colorlinks,
+  setpagesize     = false,        % page size defined by xetex
+  citecolor       = OldCyan-Dark,
+  filecolor       = OldCyan-Dark,
+  linkcolor       = OldCyan-Dark,
+  urlcolor        = OldCyan-Dark,
+  urlbordercolor  = OldCyan-Dark
+}
+
+
+\usepackage[noabbrev,capitalize]{cleveref}
+\usepackage{amsthm}
+% theorem environments
+% does not work here
+% see https://tex.stackexchange.com/questions/304024/beamer-with-numbered-theorems-not-working-with-cleveref
+% \newcounter{dummy}\numberwithin{dummy}{subsection}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+% \newcommand{\propositionautorefname}{Proposition}
+% \crefname{proposition}{Proposition}{Propositions}
+\newtheorem{corollary}{Corollary}
+\newtheorem{lemma}{Lemma}
+\newtheorem{conjecture}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{Def}{Definition}
+\newtheorem{Remark}{Remark}
+\newtheorem{Example}{Example}
+
+\let\amsmathcolon\colon
+\patchcmd{\amsmathcolon}{:}{\colon}{}{}
+  \AtBeginDocument{
+    \edef\colon{\mathrel{\Umathcharnum\the\Umathcodenum`:}}
+    \begingroup\lccode`~=`:
+    \lowercase{\endgroup\let~}\amsmathcolon
+    \mathcode`:="8000
+  }
+
+% specific tex stuff which doesn't work due to YAML escaping []
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\coim}{coim}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\eq}{eq}
+\DeclareMathOperator{\coeq}{coeq}
+\DeclareMathOperator{\quot}{quot}
+\newcommand{\colim}{\varprojlim}
+\newcommand{\Sub}{\mathbf{Sub}}
+\newcommand{\cat}[1]{\mathcal{#1}}
+\newcommand{\Sup}{\mathbf{Sup}}
+\newcommand{\DLat}{\mathbf{DLat}}
+\newcommand{\SLat}{\mathbf{SLat}}
+\newcommand{\LLat}{\mathbf{LLat}}
+\newcommand{\Ab}{\mathbf{Ab}}
+\newcommand{\Cat}{\mathbf{Cat}}
+\newcommand{\Cart}{\mathbf{Cart}}
+\newcommand{\Set}{\mathbf{Set}}
+\newcommand{\Rel}{\mathbf{Rel}}
+\newcommand{\Setd}{\mathbf{Setd}}
+\newcommand{\CRig}{\mathbf{CRig}}
+\newcommand{\CRing}{\mathbf{CRing}}
+\newcommand{\Mon}{\mathbf{Mon}}
+\newcommand{\CMon}{\mathbf{CMon}}
+\newcommand{\ICMon}{\mathbf{ICMon}}
+\newcommand{\CComon}{\mathbf{CComon}}
+\newcommand{\ICComon}{\mathbf{ICComon}}
+\newcommand{\Mod}{\mathbf{Mod}}
+\newcommand{\Dioid}{\mathbf{Dioid}}
+\newcommand{\CSLat}{\mathbf{CSLat}}
+\newcommand{\Alg}{\mathbf{Alg}}
+\newcommand{\SMonCat}{\mathbf{SMonCat}}
+\newcommand{\CQuant}{\mathbf{CQuant}}
+\newcommand{\Frm}{\mathbf{Frm}}
+\newcommand{\Loc}{\mathbf{Loc}}
+\newcommand{\Top}{\mathbf{Top}}
+\newcommand{\Eq}{\mathbf{Eq}}
+\newcommand{\Ker}{\mathbf{Ker}}
+\newcommand{\Quot}{\mathbf{Quot}}
+
+
+\usepackage{booktabs}
+\usepackage[scale=2]{ccicons}
+
+\title{era7 bionformatics}
+\subtitle{Aλhambra day}
+\author{Eduardo Pareja-Tobes, CTO}
+\date{2019-05-06}
+
+\begin{document}
+\maketitle
+
+
+% 
+\hypertarget{era7}{%
+\section{era7?}\label{era7}}
+
+\begin{frame}{%
+\protect\hypertarget{the-company-i}{%
+The Company I}}
+
+\begin{itemize}
+\tightlist
+\item
+  Founded in \textbf{2006}. Granada, Cambridge MA
+\item
+  \emph{Biological} \textbf{data analysis} \emph{Genomics, NGS}
+\item
+  \emph{Wet lab} too: Sequencing
+\item
+  \textbf{Team} mix of Biology, IT, Maths backgrounds
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{%
+\protect\hypertarget{the-company-ii}{%
+The Company II}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Research} Bioinformatics, Biology
+\item
+  \textbf{100\% Open Source} \emph{AGPLv3}, \textbf{no} dual licensing
+\item
+  \textbf{Cloud Computing} \emph{AWS}, running on it since
+  \textasciitilde{}2007
+\end{itemize}
+
+\end{frame}
+
+\hypertarget{software}{%
+\section{Software}\label{software}}
+
+\begin{frame}{%
+\protect\hypertarget{data-analysis}{%
+Data Analysis}}
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{Algorithm} design and implementation
+\item
+  Low-level DNA sequence analysis
+\item
+  AWS deployment
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{%
+\protect\hypertarget{graph-databases}{%
+Graph Databases}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Bio4j}: since 2008. Graphs for biological data.
+\item
+  strongly typed graph query language
+\item
+  Working on our own graph data engine
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{%
+\protect\hypertarget{other}{%
+Other}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Webapps}: Mostly for clients using our services.
+\item
+  \textbf{Elm} client-side, datavis
+\end{itemize}
+
+\end{frame}
+
+\hypertarget{scala}{%
+\section{Scala}\label{scala}}
+
+\begin{frame}{%
+\protect\hypertarget{use}{%
+Use}}
+
+In production since Scala 2.7/2.8 \textasciitilde{}2010. 9 years of
+experience. We have used it for basically everything:
+
+\end{frame}
+
+\begin{frame}{%
+\protect\hypertarget{use-ii}{%
+Use II}}
+
+\begin{itemize}
+\tightlist
+\item
+  Data Analysis low-level code
+\item
+  Language/eDSL implementation (graph data query languages)
+\item
+  Generic Libraries (ohnosequences/cosas, ohnosequences/stuff, \ldots{})
+\item
+  Infrastructure (AWS, mostly EC2, S3, SQS, DynamoDB)
+\item
+  Web Applications (Play)
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{%
+\protect\hypertarget{why}{%
+Why}}
+
+Team had been working in Java before; FP obvious given team background.
+JVM interop a plus (Graph Databases, good AWS support, etc).
+
+\end{frame}
+
+\begin{frame}{%
+\protect\hypertarget{learning-scala}{%
+Learning Scala}}
+
+Training people has been really hard.
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{Which} Scala?
+\item
+  Corner cases everywhere
+\item
+  No good docs anywhere
+\item
+  \ldots{}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{%
+\protect\hypertarget{happy}{%
+Happy?}}
+
+Not really. Currently using it only as a better Java. No time for going
+into much detail though.
+
+\end{frame}
+
+\begin{frame}{%
+\protect\hypertarget{performance}{%
+Performance}}
+
+\begin{itemize}
+\tightlist
+\item
+  awful collections
+\item
+  really hard to avoid object creation
+\item
+  generics and fast: pick one (specialization = more bugs)
+\item
+  value classes = more bugs, no real value
+\item
+  \ldots{}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{%
+\protect\hypertarget{as-a-better-java}{%
+As a better Java}}
+
+Nicer syntax, but\ldots{} mostly that
+
+\begin{itemize}
+\tightlist
+\item
+  interop actually not that good
+\item
+  Explosion of features/patterns confusing
+\item
+  Need to know Java anyway
+\item
+  Java (minus syntax) really close to Java wrt FP
+\end{itemize}
+
+Thinking about moving to Kotlin (web apps, infrastructure) and F\# (data
+analysis).
+
+\end{frame}
+
+\begin{frame}{%
+\protect\hypertarget{as-an-expressive-language}{%
+As an Expressive Language}}
+
+\begin{itemize}
+\tightlist
+\item
+  Bugs everywhere
+\item
+  Type inference is awful
+\item
+  fake dependent types: more problems than what they solve
+\item
+  Scala3/Dotty not looking good (dropping type projections, focus on
+  singleton types, \ldots{})
+\end{itemize}
+
+Since a year ago doing everything in \textbf{Idris} (compilers for graph
+data languages, distributed graph DB, \ldots{})
+
+\end{frame}
+
+\begin{frame}{%
+\protect\hypertarget{hiring}{%
+Hiring?}}
+
+We’re \emph{always} hiring.
+
+\begin{itemize}
+\tightlist
+\item
+  Languages, qualifications not important
+\item
+  skills, interest, willingness to learn –critical
+\end{itemize}
+
+Thank you!
+
+\end{frame}
+
+\end{document}
